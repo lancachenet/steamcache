@@ -24,6 +24,8 @@ getGameName() {
   echo $G
 }
 
+mkdir -p $TMPDIR
+
 tail -f ${CACHELOG} | while read LINE; do
 
   GAMEID=`echo ${LINE} | sed 's/.*\/depot\/\([0-9]*\)\/.*/\1/'`
