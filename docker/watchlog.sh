@@ -9,6 +9,8 @@
 #
 ############################
 
+echo "Watching logs..."
+
 . config.sh
 
 getGameName() {

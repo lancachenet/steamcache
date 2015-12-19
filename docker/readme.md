@@ -15,6 +15,12 @@ This is the Dockerfile and collection of scripts for deploying a Steam Cache usi
 
 ## Usage
 
+Run the steamcache container with the using the following to allow TCP port 80 (HTTP) and UDP port 53 (DNS) through the host machine:
+
+```
+docker run --name steamcache -p 192.168.0.5:80:80 -p 192.168.0.5:53:53/udp -e HOSTIP=192.168.0.5 murrymint/steamcache:latest
+```
+
 Start the container using run.sh. This will download the latest image and start the container. You can test that it's running using `docker info steamcache`
 
 To monitor the logfiles run `watchlog.sh`. This will display the names of the depots being downloaded and are colour-coded based on the source of the content. Red for content coming from Steam, green for content coming from the local cache and yellow for other content.
