@@ -1,13 +1,14 @@
 #!/bin/bash
 
+. /scripts/config.sh
+
+cp /etc/bind/steamcache/template.db.content_.steampowered.com /etc/bind/steamcache/db.content_.steampowered.com
+cp /etc/bind/steamcache/template.db.cs.steampowered.com /etc/bind/steamcache/db.cs.steampowered.com
+
 sed -i -e "s%{{ steamcache_ip }}%$HOSTIP%g" /etc/bind/steamcache/db.content_.steampowered.com
 sed -i -e "s%{{ steamcache_ip }}%$HOSTIP%g" /etc/bind/steamcache/db.cs.steampowered.com
 
-named -c /etc/bind/named.conf
+service bind9 start
+service nginx restart
 
-/usr/sbin/nginx
-
-sleep 2
-
-cd /scripts
-./watchlog.sh
+/scripts/watchlog.sh

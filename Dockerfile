@@ -1,34 +1,37 @@
 FROM nginx:latest
-MAINTAINER Michael Smith <me@murray-mint.co.uk>
+MAINTAINER SteamCache.Net Team <team@steamcache.net>
+
+ENV STEAMCACHE_VERSION 4
+
+RUN	DEBIAN_FRONTEND=noninteractive \
+    apt-get update \
+ && apt-get install --assume-yes \
+		bind9 \
+		wget \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY overlay/ /
+
+RUN	chmod 754 /scripts/* ;\
+	mkdir -m 755 -p /data/cache ;\
+	mkdir -m 755 -p /data/info ;\
+	mkdir -m 755 -p /data/logs ;\
+	mkdir -m 755 -p /tmp/nginx/ ;\
+	chown -R www-data:www-data /data/ ;\
+	ln -s /etc/nginx/sites-available/steamcache.conf /etc/nginx/sites-enabled/ ;\
+	ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
+
+RUN echo "include \"/etc/bind/steamcache.conf\";" >> /etc/bind/named.conf.local
+
+VOLUME ["/data/logs", "/data/cache", "/var/www"]
 
 EXPOSE 80
 EXPOSE 53/udp
 
-ENV DEBIAN_FRONTEND		noninteractive
-
-RUN	apt-get update &&		\
-	apt-get install --assume-yes	\
-		bind9			\
-		wget
-
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/configs/bind/steamcache.conf /etc/bind/steamcache.conf
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/configs/bind/steamcache/db.content_.steampowered.com /etc/bind/steamcache/db.content_.steampowered.com
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/configs/bind/steamcache/db.cs.steampowered.com /etc/bind/steamcache/db.cs.steampowered.com
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/configs/bind/named.conf.options /etc/bind/named.conf.options
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/docker/nginx.conf /etc/nginx/nginx.conf
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/docker/bootstrap.sh	/scripts/bootstrap.sh
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/docker/config.sh /scripts/config.sh
-ADD https://raw.githubusercontent.com/murray-mint/steamcache/master/docker/watchlog.sh /scripts/watchlog.sh
-
-RUN	mkdir -p /var/log/nginx	;\
-	mkdir -p /var/www/cache	;\
-	echo "include \"/etc/bind/steamcache.conf\";" >> /etc/bind/named.conf.local
-
-VOLUME ["/var/www", "/var/log/nginx"]
-
-
-RUN	chmod +x /scripts/watchlog.sh	;\
-	chmod +x /scripts/config.sh
-
 WORKDIR /scripts
+
+ENV STEAMCACHE_IP 0.0.0.0
+ENV HOST_IP 192.168.0.5
+
 ENTRYPOINT ["/scripts/bootstrap.sh"]

@@ -2,26 +2,35 @@
 
 ## Introduction
 
-This is the Dockerfile and collection of scripts for deploying a Steam Cache using Docker. The image is on [Docker Hub](https://hub.docker.com/r/murraymint/steamcache/)
+This docker container provides a a depot-caching proxy server for Steam content. For any network with more than one PC gamer in connected this will drastically reduce internet bandwidth consumption. 
 
-## Installation
-
- 1. Follow the [instructions on the Docker website](https://docs.docker.com/installation) to install Docker. 
- 2. When Docker is installed, clone this repository into a directory.
-`git clone https://github.com/murraymint/steamcache`
- 3. Change to the steamcache\docker directory `cd steamcache\docker`
- 4. Update config.sh to set the IP and directories for the container
- 5. Set the scripts to be executable with `chmod +x *.sh`
+The primary use case is gaming events, such as LAN parties, which need to be able to cope with hundreds or thousands of computers receiving an unannounced patch - without spending a fortune on internet connectivity. Other uses include smaller networks, such as Internet Cafes and home networks, where the new games are regularly installed on multiple computers; or multiple independent operating systems on the same computer.
 
 ## Usage
 
 Run the steamcache container with the using the following to allow TCP port 80 (HTTP) and UDP port 53 (DNS) through the host machine:
 
 ```
-docker run --name steamcache -p 192.168.0.5:80:80 -p 192.168.0.5:53:53/udp -e HOSTIP=192.168.0.5 murrymint/steamcache:latest
+docker run --name steamcache -p 192.168.0.5:80:80 -p 192.168.0.5:53:53/udp -e HOST_IP=192.168.0.5 murrymint/steamcache:latest
 ```
 
-Start the container using run.sh. This will download the latest image and start the container. You can test that it's running using `docker info steamcache`
+The image needs to know it's external IP address to function correctly, provide this via the HOST_IP variable.
+
+## Quick Explaination
+
+For a steam cache to function on your network you need two services.
+* A depot cache service
+* A special DNS service
+
+The depot cache service transparently proxies your requests for content to Valve, or serves the content to you if it already has it.
+
+The special DNS service handles DNS queries normally (recursively), except when they're about Steam and in that case it reponds that the depot cache service should be used.
+
+## Suggested Hardware
+
+Regular commodity hardware (a single 2TB WD Black on an HP Microserver) can achieve peak throughputs of 30MB/s+ using this setup (depending on the specific content being served).
+
+## Monitoring
 
 To monitor the logfiles run `watchlog.sh`. This will display the names of the depots being downloaded and are colour-coded based on the source of the content. Red for content coming from Steam, green for content coming from the local cache and yellow for other content.
 
@@ -53,4 +62,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
