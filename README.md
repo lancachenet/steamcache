@@ -22,9 +22,9 @@ For a steam cache to function on your network you need two services.
 * A depot cache service
 * A special DNS service
 
-The depot cache service transparently proxies your requests for content to Valve, or serves the content to you if it already has it.
+The depot cache service transparently proxies your requests for content to Steam, or serves the content to you if it already has it.
 
-The special DNS service handles DNS queries normally (recursively), except when they're about Steam and in that case it reponds that the depot cache service should be used.
+The special DNS service handles DNS queries normally (recursively), except when they're about Steam and in that case it responds that the depot cache service should be used.
 
 ## Suggested Hardware
 
