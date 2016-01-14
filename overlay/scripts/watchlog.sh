@@ -11,23 +11,23 @@
 
 echo "Watching logs..."
 
-. config.sh
+. /scripts/config.sh
 
 getGameName() {
 
-  if ! [ -s ${STEAMCACHE_DEPOTCACHE}/${1} ]; then
-    wget -O ${STEAMCACHE_DEPOTCACHE}/$1 https://steamdb.info/depot/$1/ >/dev/null 2>&1
+  if ! [ -s ${STEAMCACHE_DEPOTINFO}/${1} ]; then
+    wget -O ${STEAMCACHE_DEPOTINFO}/$1 https://steamdb.info/depot/$1/ >/dev/null 2>&1
   fi
 
     #Allows for when something goes wrong with the name.
-  G=`cat ${STEAMCACHE_DEPOTCACHE}/${1} | grep "\<h1" | sed 's/.*header-title\">//;s/<\/h1.*//'`
+  G=`cat ${STEAMCACHE_DEPOTINFO}/${1} | grep "\<h1" | sed 's/.*header-title\">//;s/<\/h1.*//'`
 
   echo $G
 }
 
-mkdir -p ${STEAMCACHE_DEPOTCACHE}
+mkdir -p ${STEAMCACHE_DEPOTINFO}
 
-tail -f ${STEAMCACHE_LOGS}/steampowered.com-access.log | while read LINE; do
+tail -F ${STEAMCACHE_LOGS}/access.log | while read LINE; do
 
   GAMEID=`echo ${LINE} | sed 's/.*\/depot\/\([0-9]*\)\/.*/\1/'`
   GAMENAME=`getGameName ${GAMEID}`
