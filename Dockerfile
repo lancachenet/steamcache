@@ -13,14 +13,14 @@ RUN	DEBIAN_FRONTEND=noninteractive \
 
 COPY overlay/ /
 
-RUN	chmod 754 /scripts/* ;\
+RUN	chmod 755 /scripts/* ;\
 	mkdir -m 755 -p /data/cache ;\
 	mkdir -m 755 -p /data/info ;\
 	mkdir -m 755 -p /data/logs ;\
 	mkdir -m 755 -p /tmp/nginx/ ;\
 	chown -R www-data:www-data /data/ ;\
-	ln -s /etc/nginx/sites-available/steamcache.conf /etc/nginx/sites-enabled/ ;\
-	ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
+	mkdir /etc/nginx/sites-enabled	;\
+	ln -s /etc/nginx/sites-available/steamcache.conf /etc/nginx/sites-enabled/steamcache.conf
 
 RUN echo "include \"/etc/bind/steamcache.conf\";" >> /etc/bind/named.conf.local
 
