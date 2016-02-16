@@ -2,5 +2,4 @@
 .gitignore
 README.md
 LICENSE
-run.sh
 .travis.yml

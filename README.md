@@ -8,19 +8,18 @@ The primary use case is gaming events, such as LAN parties, which need to be abl
 
 ## Usage
 
-Run the steamcache container with the using the following to allow TCP port 80 (HTTP) and UDP port 53 (DNS) through the host machine:
+You will need to have a DNS server forwarding queries to the machine your docker container is running on. You can use the [steamcache-dns](https://hub.docker.com/r/steamcache/steamcache-dns/) docker image to do this or you can use a DNS service already on your network see the [steamcache-dns github page](https://github.com/steamcache/steamcache-dns) for more information.
+
+Run the steamcache container with the using the following to allow TCP port 80 (HTTP) through the host machine:
 
 ```
-docker run --name steamcache -p 192.168.0.5:80:80 -p 192.168.0.5:53:53/udp -e HOST_IP=192.168.0.5 murraymint/steamcache:latest
+docker run --name steamcache -p 192.168.0.5:80:80 steamcache/steamcache:latest
 ```
-
-The image needs to know it's external IP address to function correctly, provide this via the HOST_IP variable.
-
 ## Quick Explaination
 
 For a steam cache to function on your network you need two services.
-* A depot cache service
-* A special DNS service
+* A depot cache service [This container](https://github.com/steamcache/steamcache)
+* A special DNS service [steamcache-dns](https://github.com/steamcache/steamcache-dns)
 
 The depot cache service transparently proxies your requests for content to Steam, or serves the content to you if it already has it.
 
