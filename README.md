@@ -11,7 +11,7 @@ The primary use case is gaming events, such as LAN parties, which need to be abl
 Run the steamcache container with the using the following to allow TCP port 80 (HTTP) and UDP port 53 (DNS) through the host machine:
 
 ```
-docker run --name steamcache -p 192.168.0.5:80:80 -p 192.168.0.5:53:53/udp -e HOST_IP=192.168.0.5 murrymint/steamcache:latest
+docker run --name steamcache -p 192.168.0.5:80:80 -p 192.168.0.5:53:53/udp -e HOST_IP=192.168.0.5 murraymint/steamcache:latest
 ```
 
 The image needs to know it's external IP address to function correctly, provide this via the HOST_IP variable.
