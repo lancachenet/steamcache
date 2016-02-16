@@ -3,6 +3,14 @@ MAINTAINER SteamCache.Net Team <team@steamcache.net>
 
 ENV STEAMCACHE_VERSION 5
 
+RUN	DEBIAN_FRONTEND=noninteractive	\
+	apt-get update			\
+	&& apt-get install --assume-yes	\
+		wget			\
+	&& apt-get clean		\
+	&& rm -rf /var/lib/apt/lists/*
+
+
 COPY overlay/ /
 
 RUN	chmod 755 /scripts/*			;\
@@ -21,6 +29,5 @@ EXPOSE 80
 WORKDIR /scripts
 
 ENV STEAMCACHE_IP 0.0.0.0
-ENV HOST_IP 192.168.0.5
 
 ENTRYPOINT ["/scripts/bootstrap.sh"]
