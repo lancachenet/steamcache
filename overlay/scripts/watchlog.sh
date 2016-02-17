@@ -29,8 +29,12 @@ mkdir -p ${STEAMCACHE_DEPOTINFO}
 
 tail -F ${STEAMCACHE_LOGS}/access.log | while read LINE; do
 
-  GAMEID=`echo ${LINE} | sed 's/.*\/depot\/\([0-9]*\)\/.*/\1/'`
-  GAMENAME=`getGameName ${GAMEID}`
+  GAMEID=`echo ${LINE} | grep "\/depot" | sed 's/.*\/depot\/\([0-9]*\)\/.*/\1/'`
+  if ! [ "x${GAMEID}" = "x" ]; then
+    GAMENAME=`getGameName ${GAMEID}`
+  else
+    GAMENAME="none"
+  fi
 
   echo "(${GAMENAME}) ${LINE}" | awk '
     /LOCAL/ {print "\033[32m" $0 "\033[39m"}
