@@ -1,14 +1,13 @@
-FROM nginx:latest
+FROM alpine:latest
 MAINTAINER SteamCache.Net Team <team@steamcache.net>
 
-ENV STEAMCACHE_VERSION 5
+ENV STEAMCACHE_VERSION 6
+ENV WEBUSER nginx
 
-RUN	DEBIAN_FRONTEND=noninteractive	\
-	apt-get update			\
-	&& apt-get install --assume-yes	\
-		wget			\
-	&& apt-get clean		\
-	&& rm -rf /var/lib/apt/lists/*
+RUN	apk update			\
+	&& apk add			\
+		openssl			\
+		nginx
 
 
 COPY overlay/ /
@@ -18,7 +17,7 @@ RUN	chmod 755 /scripts/*			;\
 	mkdir -m 755 -p /data/info		;\
 	mkdir -m 755 -p /data/logs		;\
 	mkdir -m 755 -p /tmp/nginx/		;\
-	chown -R www-data:www-data /data/	;\
+	chown -R ${WEBUSER}:${WEBUSER} /data/	;\
 	mkdir -p /etc/nginx/sites-enabled	;\
 	ln -s /etc/nginx/sites-available/steamcache.conf /etc/nginx/sites-enabled/steamcache.conf
 
