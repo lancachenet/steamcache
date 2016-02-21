@@ -1,7 +1,10 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
 . /scripts/config.sh
 
-service nginx restart
+/usr/sbin/nginx -t
+
+/usr/sbin/nginx
 
 /scripts/watchlog.sh
