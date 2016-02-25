@@ -5,6 +5,4 @@ set -e
 
 /usr/sbin/nginx -t
 
-/usr/sbin/nginx
-
-/scripts/watchlog.sh
+/usr/sbin/nginx -g "daemon off;"
