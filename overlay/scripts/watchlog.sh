@@ -15,14 +15,14 @@ echo "Watching logs..."
 
 getGameName() {
 
-  if ! [ -s ${STEAMCACHE_DEPOTINFO}/${1} ]; then
-    wget -O ${STEAMCACHE_DEPOTINFO}/$1 https://steamdb.info/depot/$1/ >/dev/null 2>&1
-  fi
+#  if ! [ -s ${STEAMCACHE_DEPOTINFO}/${1} ]; then
+#    wget -O ${STEAMCACHE_DEPOTINFO}/$1 https://steamdb.info/depot/$1/ >/dev/null 2>&1
+#  fi
+#
+#    #Allows for when something goes wrong with the name.
+#  G=`cat ${STEAMCACHE_DEPOTINFO}/${1} | grep "\<h1" | sed 's/.*header-title\">//;s/<\/h1.*//'`
 
-    #Allows for when something goes wrong with the name.
-  G=`cat ${STEAMCACHE_DEPOTINFO}/${1} | grep "\<h1" | sed 's/.*header-title\">//;s/<\/h1.*//'`
-
-  echo $G
+  echo $1
 }
 
 mkdir -p ${STEAMCACHE_DEPOTINFO}
