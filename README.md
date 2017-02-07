@@ -42,7 +42,7 @@ Follow the instructions in the Docker documentation to run the container at star
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Michael Smith, Robin Lewis, Brian Wojtczak, Jason Rivers
+Copyright (c) 2015 Jessica Smith, Robin Lewis, Brian Wojtczak, Jason Rivers
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
