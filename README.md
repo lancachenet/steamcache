@@ -13,7 +13,13 @@ You will need to have a DNS server forwarding queries to the machine your docker
 Run the steamcache container with the using the following to allow TCP port 80 (HTTP) through the host machine:
 
 ```
-docker run --name steamcache -p 192.168.0.5:80:80 steamcache/steamcache:latest
+docker run \
+  --restart unless-stopped \
+  --name steamcache \
+  -p 192.168.1.5:80:80 \
+  -v /cache/steam/data:/data/cache \
+  -v /cache/steam/logs:/data/logs \
+  steamcache/steamcache:latest
 ```
 ## Quick Explaination
 
