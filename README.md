@@ -36,7 +36,7 @@ To monitor the logfiles run `watchlog.sh`. This will display the names of the de
 ## Running on Startup
 
 Follow the instructions in the Docker documentation to run the container at startup.
-[Documentation](https://docs.docker.com/articles/host_integration/)
+[Documentation](https://docs.docker.com/config/containers/start-containers-automatically/)
 
 ## License
 
