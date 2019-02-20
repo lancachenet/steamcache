@@ -12,7 +12,7 @@ echo "| |  |__/  \__|  | || ||____|  |____|| || | |____| |___| | || ||_____|\___
 echo "| |              | || |              | || |              | || |              | || |              | || |              | || |              | |"
 echo "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |"
 echo " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' "
-echo "This container has now been deprecated in favour of steamcache/monolithic. We recommend moving at the earliest possible oppourtunity"
+echo "This container has now been deprecated in favour of steamcache/monolithic. We recommend moving at the earliest possible opportunity"
 
 . /scripts/config.sh
 
@@ -33,6 +33,6 @@ echo "| |  |__/  \__|  | || ||____|  |____|| || | |____| |___| | || ||_____|\___
 echo "| |              | || |              | || |              | || |              | || |              | || |              | || |              | |"
 echo "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |"
 echo " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' "
-echo "This container has now been deprecated in favour of steamcache/monolithic. We recommend moving at the earliest possible oppourtunity"
+echo "This container has now been deprecated in favour of steamcache/monolithic. We recommend moving at the earliest possible opportunity"
 
 /usr/sbin/nginx -g "daemon off;"
