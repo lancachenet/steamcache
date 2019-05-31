@@ -1,6 +1,6 @@
 # WARNING: DEPRECATED CONTAINER
 
-The steamcache/steamcache container is no longer recommended for use as it is no longer under active development. The steamcache team highly recommends using our [steamcache/monolithic](https://www.github.com/steamcache/monolithic) container instead as it offers drastic performance and speed improvements over the old steamcache method.
+The lancachenet/steamcache container is no longer recommended for use as it is no longer under active development. The lancachenet team highly recommends using our [lancachenet/monolithic](https://www.github.com/lancachenet/monolithic) container instead as it offers drastic performance and speed improvements over the old steamcache method.
 
 # Steam Cache Docker Container
 
@@ -12,7 +12,7 @@ The primary use case is gaming events, such as LAN parties, which need to be abl
 
 ## Usage
 
-You will need to have a DNS server forwarding queries to the machine your docker container is running on. You can use the [steamcache-dns](https://hub.docker.com/r/steamcache/steamcache-dns/) docker image to do this or you can use a DNS service already on your network. See the [steamcache-dns github page](https://github.com/steamcache/steamcache-dns) for more information.
+You will need to have a DNS server forwarding queries to the machine your docker container is running on. You can use the [lancache-dns](https://hub.docker.com/r/lancachenet/lancache-dns/) docker image to do this or you can use a DNS service already on your network. See the [lancache-dns github page](https://github.com/lancachenet/lancache-dns) for more information.
 
 Run the steamcache container with the using the following to allow TCP port 80 (HTTP) through the host machine:
 
@@ -23,13 +23,13 @@ docker run \
   -p 192.168.1.5:80:80 \
   -v /cache/steam/data:/data/cache \
   -v /cache/steam/logs:/data/logs \
-  steamcache/steamcache:latest
+  lancachenet/steamcache:latest
 ```
 ## Quick Explaination
 
 For a steam cache to function on your network you need two services.
-* A depot cache service [This container](https://github.com/steamcache/steamcache)
-* A special DNS service [steamcache-dns](https://github.com/steamcache/steamcache-dns)
+* A depot cache service [This container](https://github.com/lancachenet/steamcache)
+* A special DNS service [lancache-dns](https://github.com/lancachenet/lancache-dns)
 
 The depot cache service transparently proxies your requests for content to Steam, or serves the content to you if it already has it.
 

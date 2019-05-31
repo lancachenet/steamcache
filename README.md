@@ -1,6 +1,6 @@
 # WARNING: DEPRECATED CONTAINER
 
-The steamcache/steamcache container is not  recommended for use as it is no longer under active development. The steamcache team highly recommends using our [lancachenet/monolithic](https://hub.docker.com/r/lancachenet/monolithic) container instead as it offers drastic performance and speed improvements over the old steamcache method.
+The lancachenet/steamcache container is not  recommended for use as it is no longer under active development. The lancachenet team highly recommends using our [lancachenet/monolithic](https://hub.docker.com/r/lancachenet/monolithic) container instead as it offers drastic performance and speed improvements over the old steamcache method.
 
 ## License
 
